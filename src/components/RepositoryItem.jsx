@@ -47,12 +47,24 @@ const RepositoryItem = ({ repository }) => {
           </View>
         </View>
       </View>
-
-      <Text>Forks: {counterKsuffix(forksCount)}</Text>
-      <Text>Stars: {stargazersCount}</Text>
-      <Text>Rating: {ratingAverage}</Text>
-      <Text>Reviws: {reviewCount}</Text>
-      <Text>Avatar: {ownerAvatarUrl}</Text>
+      <View style={styles.footerItemContainer}>
+        <View style={styles.counterContainer}>
+          <Text fontWeight={'bold'}>{counterKsuffix(forksCount)}</Text>
+          <Text>Forks</Text>
+        </View>
+        <View style={styles.counterContainer}>
+          <Text fontWeight={'bold'}>{counterKsuffix(stargazersCount)}</Text>
+          <Text>Stars</Text>
+        </View>
+        <View style={styles.counterContainer}>
+          <Text fontWeight={'bold'}>{counterKsuffix(ratingAverage)}</Text>
+          <Text>Rating</Text>
+        </View>
+        <View style={styles.counterContainer}>
+          <Text fontWeight={'bold'}>{counterKsuffix(reviewCount)}</Text>
+          <Text>Reviews</Text>
+        </View>
+      </View>
     </View>
   );
 };
@@ -82,5 +94,11 @@ const styles = StyleSheet.create({
   },
   textDescription: {
     flexShrink: 1,
+  },
+  counterContainer: { justifyContent: 'center', alignItems: 'center' },
+  footerItemContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 10,
   },
 });
