@@ -1,7 +1,12 @@
 import React from 'react';
-import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  ScrollView,
+} from 'react-native';
 import Constants from 'expo-constants';
-import { Link } from 'react-router-native';
+import { Link, useLocation } from 'react-router-native';
 
 import Text from './Text';
 
@@ -11,15 +16,24 @@ const styles = StyleSheet.create({
     backgroundColor: '#24292e',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    // ...
   },
-  // ...
+  linkTab: { paddingHorizontal: 15 },
+  scrollTabContainer: {
+    paddingBottom: 15,
+  },
 });
 
-const AppBarTab = ({ active, children, to }) => {
+const AppBarTab = ({ children, to }) => {
+  const { pathname } = useLocation();
+  const active = pathname === to;
+
   return (
-    <Link to={to}>
-      <Text fontSize={'subheading'} fontWeight={'bold'} color={'textWhite'}>
+    <Link to={to} style={styles.linkTab}>
+      <Text
+        fontSize={'subheading'}
+        fontWeight={'bold'}
+        color={active ? 'textWhite' : 'textSecondary'}
+      >
         {children}
       </Text>
     </Link>
@@ -29,7 +43,8 @@ const AppBarTab = ({ active, children, to }) => {
 const AppBar = () => {
   return (
     <View style={styles.container}>
-      {/* <Link active to={'/'}>
+      <ScrollView horizontal style={styles.scrollTabContainer}>
+        {/* <Link active to={'/'}>
         <Text fontSize={'subheading'} fontWeight={'bold'} color={'textWhite'}>
           Repositories
         </Text>
@@ -39,12 +54,9 @@ const AppBar = () => {
           Sign In
         </Text>
       </Link> */}
-      <AppBarTab active to={'/'}>
-        Repositories
-      </AppBarTab>
-      <AppBarTab active to={'/signin'}>
-        Sign In
-      </AppBarTab>
+        <AppBarTab to={'/'}>Repositories</AppBarTab>
+        <AppBarTab to={'/signin'}>Sign In</AppBarTab>
+      </ScrollView>
     </View>
   );
 };
