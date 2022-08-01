@@ -25,10 +25,7 @@ const RepositoryItem = ({ repository }) => {
   return (
     <View style={styles.container}>
       <View style={styles.avatarContainer}>
-        <Image
-          style={{ width: 80, height: 80, borderRadius: 8 }}
-          source={{ uri: ownerAvatarUrl }}
-        />
+        <Image style={styles.avatarImg} source={{ uri: ownerAvatarUrl }} />
         <View style={styles.avatarTextContainer}>
           <Text fontWeight={'bold'} fontSize={'subheading'}>
             {fullName}
@@ -78,17 +75,16 @@ const styles = StyleSheet.create({
   },
   avatarContainer: {
     flexDirection: 'row',
-    flexGrow: 0,
   },
+  avatarImg: { height: 80, width: 80, borderRadius: 7 },
   avatarTextContainer: {
     justifyContent: 'space-between',
-    flexGrow: 1,
     flexShrink: 1,
     marginLeft: 15,
   },
   languageContainer: {
-    backgroundColor: theme.colors.primary,
     alignSelf: 'flex-start',
+    backgroundColor: theme.colors.primary,
     padding: 4,
     borderRadius: 2,
   },
