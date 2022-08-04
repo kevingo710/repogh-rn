@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList, View, StyleSheet, Text } from 'react-native';
 import RepositoryItem from './RepositoryItem';
 
@@ -62,20 +62,39 @@ const ItemSeparator = () => <View style={styles.separator} />;
 //     <RepositoryItem item={item} />
 //   );
 
-
-
-
-  
-
 const RepositoryList = () => {
+  const [repositories, setRepositories] = useState();
+
+  const fetchRepositories = async () => {
+    try {
+      // Replace the IP address part with your own IP address!
+      const response = await fetch(
+        'http://192.168.200.110:5000/api/repositories'
+      );
+      const json = await response.json();
+      console.log(json);
+      setRepositories(json);
+    } catch (error) {
+      console.log({ error });
+      throw new Error('Error fetching');
+    }
+  };
+
+  useEffect(() => {
+    fetchRepositories();
+  }, []);
+
+  // Get the nodes from the edges array
+  const repositoryNodes = repositories
+    ? repositories.edges.map((edge) => edge.node)
+    : [];
+
   return (
     <FlatList
-      data={repositories}
+      data={repositoryNodes}
       ItemSeparatorComponent={ItemSeparator}
       // other props
-      renderItem={({ item }) => (
-        <RepositoryItem repository={item} />
-      )} //llamas directo en la prop al Item importado
+      renderItem={({ item }) => <RepositoryItem repository={item} />} //llamas directo en la prop al Item importado
     />
   );
 };
