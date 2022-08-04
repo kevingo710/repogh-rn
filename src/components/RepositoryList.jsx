@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, View, StyleSheet, Text } from 'react-native';
+import useRepositories from '../hooks/useRepositories';
 import RepositoryItem from './RepositoryItem';
 
 const styles = StyleSheet.create({
@@ -63,26 +64,27 @@ const ItemSeparator = () => <View style={styles.separator} />;
 //   );
 
 const RepositoryList = () => {
-  const [repositories, setRepositories] = useState();
+  // const [repositories, setRepositories] = useState();
+  const { repositories } = useRepositories();
 
-  const fetchRepositories = async () => {
-    try {
-      // Replace the IP address part with your own IP address!
-      const response = await fetch(
-        'http://192.168.200.110:5000/api/repositories'
-      );
-      const json = await response.json();
-      console.log(json);
-      setRepositories(json);
-    } catch (error) {
-      console.log({ error });
-      throw new Error('Error fetching');
-    }
-  };
+  // const fetchRepositories = async () => {
+  //   try {
+  //     // Replace the IP address part with your own IP address!
+  //     const response = await fetch(
+  //       'http://192.168.200.110:5000/api/repositories'
+  //     );
+  //     const json = await response.json();
+  //     console.log(json);
+  //     setRepositories(json);
+  //   } catch (error) {
+  //     console.log({ error });
+  //     throw new Error('Error fetching');
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchRepositories();
-  }, []);
+  // useEffect(() => {
+  //   fetchRepositories();
+  // }, []);
 
   // Get the nodes from the edges array
   const repositoryNodes = repositories
