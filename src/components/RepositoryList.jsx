@@ -87,13 +87,10 @@ const RepositoryList = () => {
   // }, []);
 
   // Get the nodes from the edges array
-  const repositoryNodes = repositories
-    ? repositories.edges.map((edge) => edge.node)
-    : [];
 
   return (
     <FlatList
-      data={repositoryNodes}
+      data={repositories}
       ItemSeparatorComponent={ItemSeparator}
       // other props
       renderItem={({ item }) => <RepositoryItem repository={item} />} //llamas directo en la prop al Item importado

@@ -21,7 +21,11 @@ const useRepositories = () => {
     fetchRepositories();
   }, []);
 
-  return { repositories, loading, refetch: fetchRepositories };
+  const repositoryNodes = repositories
+    ? repositories.edges.map((edge) => edge.node)
+    : [];
+
+  return { repositories: repositoryNodes, loading, refetch: fetchRepositories };
 };
 
 export default useRepositories;
